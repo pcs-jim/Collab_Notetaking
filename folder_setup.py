@@ -41,9 +41,46 @@ drive_service = build('drive', 'v3', credentials=creds)
 doc_service = build('docs', 'v1', credentials=creds)
 
 
+parent_folder_name = "Collaborative Notes for Spring 2020"
+section_folder_names = ['Section A', 'Section B', 'Section C']
+group_folder_names = ['Group 1', 'Group 2', 'Group 3', 'Group 4', 'Group 5']
+doc_file_names = ['Week 1 & 2', 'Week 3', 'Week 4', 'Week 5']
+
+d_header = """Scientific Writing, CC500
+Group Notes for """
+d_body = """
+
+Greetings, students. This document is used for taking collaborative notes with your group members during the semester. Please write your notes for each video below the appropriate headings. Use as much space as needed.
+
+Please use different colored text so that I can distinguish what you wrote.
+
+Use the following colors:
+
+Bob - Brown
+Sam - Purple
+Jenny - Green
+Cindy - Blue
+"""
+
+def create_drive_folder(folder_name):
+    file_metadata = {
+        'name': folder_name,
+        'mimeType': 'application/vnd.google-apps.folder'
+    }
+
+    file = drive_service.files().create(body=file_metadata, fields='id').execute()
+    return file.get('id')
 
 
+def create_drive_folder_in_parent(folder_name, parent_id):
+    file_metadata = {
+        'name': folder_name,
+        'mimeType': 'application/vnd.google-apps.folder',
+        'parents': [parent_id]
+    }
 
+    file = drive_service.files().create(body=file_metadata, fields='id').execute()
+    return file.get('id')
 
 
 
