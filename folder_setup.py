@@ -13,6 +13,9 @@ On: 10/4/2019
 
 The purpose of this is to set up the initial folders and files for a collaborative notetaking study
 under the guidance of Professor Mik Fanguy of KAIST university of Daejeon, South Korea.
+
+You'll need to download the 'credentials.json' from your Google account.
+
 """
 
 
@@ -161,7 +164,7 @@ for section_names in section_folder_names:
             update_result = doc_service.documents().batchUpdate(
                 documentId=doc_id, body={'requests': update_requests}).execute()
 
-
+            # Change the font colors of the example students.
             update_requests = [
                 {
                     'updateTextStyle': {
