@@ -15,7 +15,6 @@ The purpose of this is to set up the initial folders and files for a collaborati
 under the guidance of Professor Mik Fanguy of KAIST university of Daejeon, South Korea.
 
 You'll need to download the 'credentials.json' from your Google account.
-
 """
 
 
