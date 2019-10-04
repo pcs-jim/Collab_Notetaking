@@ -1,18 +1,29 @@
 from __future__ import print_function
 import pickle
-import os.path
+import os
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
+from oauth2client.file import Storage
+import httplib2
 
 """
+Created by: Jim Chang
+On: 10/4/2019
 
-
-
+The purpose of this is to set up the initial folders and files for a collaborative notetaking study
+under the guidance of Professor Mik Fanguy of KAIST university of Daejeon, South Korea.
 """
 
 
 # Get Google Drive authentication
+storage = Storage('my_creds.txt')
+credentials = storage.get()
+
+http = httplib2.Http()
+http = credentials.authorize(http)
+
+drive_service = build('drive', 'v3', http=http)
 
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/drive']
@@ -35,8 +46,6 @@ if not creds or not creds.valid:
     # Save the credentials for the next run
     with open('token.pickle', 'wb') as token:
         pickle.dump(creds, token)
-
-drive_service = build('drive', 'v3', credentials=creds)
 
 doc_service = build('docs', 'v1', credentials=creds)
 
@@ -83,15 +92,102 @@ def create_drive_folder_in_parent(folder_name, parent_id):
     return file.get('id')
 
 
+# Create parent folder
+parent_folder_id = create_drive_folder(parent_folder_name)
+
+# Create section folders
+for section_names in section_folder_names:
+    section_id = create_drive_folder_in_parent(section_names, parent_folder_id)
+
+    # Create group folders
+    for group_names in group_folder_names:
+        group_folder_id = create_drive_folder_in_parent(group_names, section_id)
+
+        # Create Google Document.
+        for doc_file_name in doc_file_names:
+
+            file_metadata = {
+                'name': doc_file_name,
+                'mimeType': 'application/vnd.google-apps.document',
+                'parents': [group_folder_id]
+            }
+            file = drive_service.files().create(body=file_metadata, fields='id').execute()
+            doc_id = file.get('id')
+
+            # TODO: Give permission to each document.
+
+            bold_long_header = 0
+            if len(doc_file_name) > 6:
+                bold_long_header = 4
+            else:
+                bold_long_header = 0
+
+            requests = [
+                {
+                    'insertText': {
+                        'text': d_header + doc_file_name + d_body,
+                        'location': {
+                            'index': 1,
+                        }
+                    }
+
+                }
+            ]
+
+            result = doc_service.documents().batchUpdate(
+                documentId=doc_id, body={'requests': requests}).execute()
+
+            # Header
+            update_requests = [
+                {
+                    'updateTextStyle': {
+                        'range': {
+                            'startIndex': 1,
+                            'endIndex': 50 + bold_long_header
+                        },
+                        'textStyle': {
+                            'bold': True,
+                            'fontSize': {
+                                'magnitude': 18,
+                                'unit': 'PT'
+                            }
+                        },
+                        'fields': 'bold, fontSize'
+                    }
+
+                }
+            ]
+
+            update_result = doc_service.documents().batchUpdate(
+                documentId=doc_id, body={'requests': update_requests}).execute()
 
 
+            update_requests = [
+                {
+                    'updateTextStyle': {
+                        'range': {
+                            'startIndex': 400 + bold_long_header,
+                            'endIndex': 414 + bold_long_header
+                        },
+                        'textStyle': {
+                            'foregroundColor': {
+                                'color': {
+                                    'rgbColor': {
+                                        'blue': 0.0,
+                                        'green': 1.0,
+                                        'red': 0.0
+                                    }
+                                }
+                            }
+                        },
+                        'fields': 'foregroundColor'
+                    }
 
+                }
+            ]
 
-
-
-
-
-
+            update_result = doc_service.documents().batchUpdate(
+                documentId=doc_id, body={'requests': update_requests}).execute()
 
 
 
