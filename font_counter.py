@@ -57,14 +57,7 @@ def tokenize_sentences(doc):
     return sentences
 
 
-def clean_sentence(sent):
-    cleaned_sent = ""
-    for word in sent:
-        cleaned_sent += word + " "
-    cleaned_sent = re.sub("[^a-zA-Z]"," ", cleaned_sent)
-    cleaned_sent = ' '.join(cleaned_sent.split())
-    cleaned_sent = ' '.join([i for i in cleaned_sent.split() if i not in stop])
-    return cleaned_sent
+
 
 
 # Get permission via web browser.
@@ -190,7 +183,7 @@ for class_list in collaborative_notes_list:
 
                     for revision in revisions:
                         # Add a revision to the dictionary.
-                        doc_revision_list[revision['id']] = StudentRevisions(revision['id'])
+                        doc_revision_list[revision['id']] = student_revisions(revision['id'])
 
                         switch1 = ''
                         switch2 = ''
