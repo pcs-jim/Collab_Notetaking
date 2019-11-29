@@ -28,7 +28,7 @@ from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
 
 from student_revisions import student_revisions
-# import collabo_db
+import collabo_db
 
 
 def retrieve_revisions(service, file_id):
@@ -48,17 +48,6 @@ def retrieve_revisions(service, file_id):
     except errors.HttpError as error:
         print('An error occurred: %s' % error)
     return None
-
-
-def tokenize_sentences(doc):
-    sentences = nltk.sent_tokenize(doc)
-    sentences = [nltk.word_tokenize(sent) for sent in sentences]
-
-    return sentences
-
-
-
-
 
 # Get permission via web browser.
 gauth = GoogleAuth()
