@@ -1,5 +1,5 @@
 """
-Created by: Jim Chang
+Created by: Jaemyong Chang
 On: 11/29/2019
 
 After initial setup of the folders and files,
@@ -77,19 +77,19 @@ stop = stopwords.words('english')
 
 '''
     Folder names and IDs:
-    Notetaking PhD study Spring 2019 1l45GrohGdVfkwiWoeWtyDJwI5Ru9ZmaJ
-    Collaborative Notes 1bqMxTPr2gMcPv1Q5tLyxjT7jeL_vlZfA
-    CC500 D 1pKmgobXQ59iO6YsBD6RcDjylrfmFyXRc
-    CC500 J 1bWGGrh7Fupx06_6pZitjKV5OHgenfm_g
-    CC500 T 1SC-9Iw_ot1eqIrGveY3oFF5EI7yeoR9T
-    CC500 B 1qaE9YNVjaPqwMpPvdn4HjQufxS7rF2CT
+    Notetaking PhD study Spring 2019 FOLDER_ID1
+    Collaborative Notes FOLDER_ID2
+    CC500 D FOLDER_ID3
+    CC500 J FOLDER_ID4
+    CC500 T FOLDER_ID5
+    CC500 B FOLDER_ID6
     
     
     Look in folder:
     'Notetaking PhD study Spring 2019' -> 'Collaborative Notes'
 '''
 
-folder_id = '1NiNkEUPgym0wPd6BUFBhhOJgkGDmhhrE'  # Collaborative Notes ID
+folder_id = 'ADD FOLDER ID HERE'  # Collaborative Notes ID
 
 mimetypes = {
     # Microsoft Word Document.

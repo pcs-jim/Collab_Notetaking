@@ -8,7 +8,7 @@ from oauth2client.file import Storage
 import httplib2
 
 """
-Created by: Jim Chang
+Created by: Jaemyong Chang
 On: 10/4/2019
 
 The purpose of this is to set up the initial folders and files for a collaborative notetaking study
