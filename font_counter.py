@@ -72,7 +72,6 @@ http = httplib2.Http()
 http = credentials.authorize(http)
 
 drive_service = build('drive', 'v2', http=http)
-stop = stopwords.words('english')
 
 
 '''
