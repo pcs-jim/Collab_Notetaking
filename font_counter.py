@@ -6,8 +6,6 @@ After initial setup of the folders and files,
 this counts the words and the number of turns of the Google Doc
 in each of the specified folders.
 
-
-
 """
 
 
@@ -29,6 +27,24 @@ from pydrive.drive import GoogleDrive
 
 from student_revisions import student_revisions
 import collabo_db
+
+'''
+    Example folder names and IDs:
+    
+    Notetaking PhD study Spring 2019 FOLDER_ID1
+    Collaborative Notes FOLDER_ID2
+    CC500 D FOLDER_ID3
+    CC500 J FOLDER_ID4
+    CC500 T FOLDER_ID5
+    CC500 B FOLDER_ID6
+    
+    
+    Look in folder:
+    'Notetaking PhD study Spring 2019' -> 'Collaborative Notes'
+'''
+
+folder_id = 'ADD FOLDER ID HERE'  # Parent folder for collaborative notetaking study.
+
 
 
 def retrieve_revisions(service, file_id):
@@ -72,23 +88,6 @@ http = httplib2.Http()
 http = credentials.authorize(http)
 
 drive_service = build('drive', 'v2', http=http)
-
-
-'''
-    Folder names and IDs:
-    Notetaking PhD study Spring 2019 FOLDER_ID1
-    Collaborative Notes FOLDER_ID2
-    CC500 D FOLDER_ID3
-    CC500 J FOLDER_ID4
-    CC500 T FOLDER_ID5
-    CC500 B FOLDER_ID6
-    
-    
-    Look in folder:
-    'Notetaking PhD study Spring 2019' -> 'Collaborative Notes'
-'''
-
-folder_id = 'ADD FOLDER ID HERE'  # Collaborative Notes ID
 
 mimetypes = {
     # Microsoft Word Document.
