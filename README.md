@@ -19,4 +19,4 @@ Collab_Notetaking is a custom system to download multiple Google Docs from vario
 5. Enter in the class names seperated by spaces. Individual names must not have spaces.
 6. Enter in the group names seperated by spaces. Individual names must not have spaces.
 
-*(Recommended to use underscores instead of spaces.
+*Recommended to use underscores instead of spaces.
